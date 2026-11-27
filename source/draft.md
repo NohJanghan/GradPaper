@@ -136,20 +136,20 @@ We report four primary metrics: Success Rate (SR), Success weighted by Path Leng
 | Teacher Model | SR (%) $\uparrow$ | SPL (%) $\uparrow$ | OSR (%) $\uparrow$ | NE (m) $\downarrow$ |
 | :--- | :---: | :---: | :---: | :---: |
 | Baseline (No teacher) | 36.43 | 31.40 | 48.18 | 7.40 |
-| VGGT | 36.81 (+0.38) | 31.99 | 48.56 | 7.44 |
-| Pi3 | **41.49 (+5.06)** | **36.45** | **54.92** | **6.54** |
-| DA3 | 37.36 (+0.93) | 31.90 | 49.86 | 7.14 |
-| CUT3R | 37.25 (+0.82) | 31.87 | 49.32 | 7.37 |
+| VGGT | 36.81 | 31.99 | 48.56 | 7.44 |
+| Pi3 | **41.49** | **36.45** | **54.92** | **6.54** |
+| DA3 | 37.36 | 31.90 | 49.86 | 7.14 |
+| CUT3R | 37.25 | 31.87 | 49.32 | 7.37 |
 
 **Table 2.** VLN Performance by Teacher Models on R2R-CE Benchmark
 
 | Teacher Model | SR (%) $\uparrow$ | SPL (%) $\uparrow$ | OSR (%) $\uparrow$ | NE (m) $\downarrow$ | nDTW (%) $\uparrow$ |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Baseline (No teacher) | 42.93 | 34.28 | 56.12 | 7.48 | 53.36 |
-| VGGT | 43.01 | 34.39 | 55.82 | 7.52 | 53.00 (-0.36) |
-| Pi3 | **44.81** | **36.24** | **57.51** | **7.43** | **53.87 (+0.51)** |
-| DA3 | 42.41 | 33.66 | 55.63 | 7.67 | 52.30 (-1.06) |
-| CUT3R | 42.93 | 34.17 | 55.36 | 7.78 | 52.19 (-1.17) |
+| VGGT | 43.01 | 34.39 | 55.82 | 7.52 | 53.00 |
+| Pi3 | **44.81** | **36.24** | **57.51** | **7.43** | **53.87** |
+| DA3 | 42.41 | 33.66 | 55.63 | 7.67 | 52.30 |
+| CUT3R | 42.93 | 34.17 | 55.36 | 7.78 | 52.19 |
 
 **Table 3.** VLN Performance by Teacher Models on RxR-CE Benchmark
 

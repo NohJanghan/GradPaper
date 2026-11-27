@@ -47,10 +47,10 @@ We report four primary metrics: Success Rate (SR), Success weighted by Path Leng
         Teacher Model & SR (\%) $\uparrow$ & SPL (\%) $\uparrow$ & OSR (\%) $\uparrow$ & NE (m) $\downarrow$ \\
         \midrule
         Baseline (No teacher) & 36.43 & 31.40 & 48.18 & 7.40 \\
-        VGGT & 36.81 (+0.38) & 31.99 & 48.56 & 7.44 \\
-        Pi3 & \textbf{41.49 (+5.06)} & \textbf{36.45} & \textbf{54.92} & \textbf{6.54} \\
-        DA3 & 37.36 (+0.93) & 31.90 & 49.86 & 7.14 \\
-        CUT3R & 37.25 (+0.82) & 31.87 & 49.32 & 7.37 \\
+        VGGT & 36.81 & 31.99 & 48.56 & 7.44 \\
+        Pi3 & \textbf{41.49} & \textbf{36.45} & \textbf{54.92} & \textbf{6.54} \\
+        DA3 & 37.36 & 31.90 & 49.86 & 7.14 \\
+        CUT3R & 37.25 & 31.87 & 49.32 & 7.37 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -64,10 +64,10 @@ We report four primary metrics: Success Rate (SR), Success weighted by Path Leng
         Teacher Model & SR (\%) $\uparrow$ & SPL (\%) $\uparrow$ & OSR (\%) $\uparrow$ & NE (m) $\downarrow$ & nDTW (\%) $\uparrow$ \\
         \midrule
         Baseline (No teacher) & 42.93 & 34.28 & 56.12 & 7.48 & 53.36 \\
-        VGGT & 43.01 & 34.39 & 55.82 & 7.52 & 53.00 (-0.36) \\
-        Pi3 & \textbf{44.81} & \textbf{36.24} & \textbf{57.51} & \textbf{7.43} & \textbf{53.87 (+0.51)} \\
-        DA3 & 42.41 & 33.66 & 55.63 & 7.67 & 52.30 (-1.06) \\
-        CUT3R & 42.93 & 34.17 & 55.36 & 7.78 & 52.19 (-1.17) \\
+        VGGT & 43.01 & 34.39 & 55.82 & 7.52 & 53.00 \\
+        Pi3 & \textbf{44.81} & \textbf{36.24} & \textbf{57.51} & \textbf{7.43} & \textbf{53.87} \\
+        DA3 & 42.41 & 33.66 & 55.63 & 7.67 & 52.30 \\
+        CUT3R & 42.93 & 34.17 & 55.36 & 7.78 & 52.19 \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -89,11 +89,12 @@ This disparity stems from the degree of alignment between each teacher's predict
         \toprule
         Family & Teacher & Directionality & SR (\%) $\uparrow$ & SPL (\%) $\uparrow$ & OSR (\%) $\uparrow$ & NE (m) $\downarrow$ \\
         \midrule
-        VGGT & VGGT & Bidirectional & 36.81 & 31.99 & 48.56 & 7.44 \\
-        VGGT & Causal VGGT & Causal, mask-only & \textbf{36.87} & \textbf{32.05} & \textbf{49.05} & \textbf{7.40} \\
-        VGGT & StreamVGGT & Causal, trained & 35.51 & 30.22 & 46.82 & 7.63 \\
-        CUT3R & CUT3R revisiting & Bidirectional & 36.05 & 31.36 & 49.10 & \textbf{7.37} \\
-        CUT3R & CUT3R & Causal, recurrent & \textbf{37.25} & \textbf{31.87} & \textbf{49.32} & \textbf{7.37} \\
+        \multirow{3}{*}{VGGT} & VGGT & Bidirectional & 36.81 & 31.99 & 48.56 & 7.44 \\
+         & Causal VGGT & Causal, mask-only & \textbf{36.87} & \textbf{32.05} & \textbf{49.05} & \textbf{7.40} \\
+         & StreamVGGT & Causal, trained & 35.51 & 30.22 & 46.82 & 7.63 \\
+        \midrule
+        \multirow{2}{*}{CUT3R} & CUT3R revisiting & Bidirectional & 36.05 & 31.36 & 49.10 & \textbf{7.37} \\
+         & CUT3R & Causal, recurrent & \textbf{37.25} & \textbf{31.87} & \textbf{49.32} & \textbf{7.37} \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -108,11 +109,12 @@ This disparity stems from the degree of alignment between each teacher's predict
         \toprule
         Family & Teacher & Directionality & SR (\%) $\uparrow$ & SPL (\%) $\uparrow$ & OSR (\%) $\uparrow$ & NE (m) $\downarrow$ & nDTW (\%) $\uparrow$ \\
         \midrule
-        VGGT & VGGT & Bidirectional & \textbf{43.01} & \textbf{34.39} & \textbf{55.82} & \textbf{7.52} & \textbf{53.00} \\
-        VGGT & Causal VGGT & Causal, mask-only & 41.48 & 33.12 & 54.75 & 7.88 & 51.60 \\
-        VGGT & StreamVGGT & Causal, trained & 42.49 & 34.15 & 55.27 & 7.79 & 52.75 \\
-        CUT3R & CUT3R revisiting & Bidirectional & 41.59 & 33.48 & 54.65 & \textbf{7.74} & \textbf{52.92} \\
-        CUT3R & CUT3R & Causal, recurrent & \textbf{42.93} & \textbf{34.17} & \textbf{55.36} & 7.78 & 52.19 \\
+        \multirow{3}{*}{VGGT} & VGGT & Bidirectional & \textbf{43.01} & \textbf{34.39} & \textbf{55.82} & \textbf{7.52} & \textbf{53.00} \\
+         & Causal VGGT & Causal, mask-only & 41.48 & 33.12 & 54.75 & 7.88 & 51.60 \\
+         & StreamVGGT & Causal, trained & 42.49 & 34.15 & 55.27 & 7.79 & 52.75 \\
+        \midrule
+        \multirow{2}{*}{CUT3R} & CUT3R revisiting & Bidirectional & 41.59 & 33.48 & 54.65 & \textbf{7.74} & \textbf{52.92} \\
+         & CUT3R & Causal, recurrent & \textbf{42.93} & \textbf{34.17} & \textbf{55.36} & 7.78 & 52.19 \\
         \bottomrule
     \end{tabular}
 \end{table}

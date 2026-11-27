@@ -1,4 +1,17 @@
-Multimodal Large Language Models는 Vision-and-Language Navigation에서 뛰어난 일반화 성능을 보이지만, 2D-centric visual encoder는 3D spatial reasoning에 어려움을 겪는다. Pretrained geometry foundation model을 활용한 training-time feature distillation은 inference overhead 없이 3D prior를 주입하지만, 효과적인 전이를 위한 설계 조건은 아직 규명되지 않았다.
+Multimodal Large Language Models는 Vision-and-Language Navigation에서 뛰어난 일반화 성능을 보이지만,
+2D-centric visual encoder는 3D spatial reasoning에 어려움을 겪는다.
+사전학습된 geometry foundation model을 활용한 training-time feature distillation은
+inference overhead 없이 3D prior를 주입하지만, 효과적인 전이를 위한 설계 조건은 아직 규명되지 않았다.
 
-본 논문은 VLN-CE에서 geometry feature distillation의 세 가지 설계 요인으로 feed-forward 및 recurrent 모델 간 teacher selection, bidirectional 및 causal teacher를 비교하는 information flow directionality, 그리고 navigation history의 temporal stride를 평가한다. 실험 결과 세 가지 발견이 도출되었다. 첫째, 표준 final-layer distillation 환경에서 final layer로부터 geometry를 직접 디코딩하는 Pi3는 non-distilled baseline을 크게 상회한 반면, DPT-based 모델들은 미미한 이득에 그치거나 negative transfer를 보였으며, 이는 decoding head와 distillation target 간의 정합성이 핵심적임을 보여준다. 둘째, bidirectional 및 causal 변형 간에는 일관된 우위가 나타나지 않아 attention directionality가 주요 병목이 아님을 시사한다. 셋째, 더 넓은 temporal stride는 더 긴 history를 통해 전반적인 성능을 향상시키지만, 넓은 stride에서는 visual overlap 감소로 인해 distillation 이득이 축소된다. 종합하면 target representation alignment와 temporal context가 attention directionality보다 더 큰 영향을 미치며, 이는 DPT-based teacher를 위한 multi-layer distillation과 decoupled stride 설계의 동기를 제공한다.
+본 논문은 VLN-CE에서 geometry feature distillation의 세 가지 설계 요인으로 feed-forward 및
+recurrent 모델 간 teacher selection, bidirectional 및 causal teacher를 비교하는
+information flow directionality, 그리고 navigation history의 temporal stride를 평가한다.
+실험 결과 세 가지 발견이 도출하였다. 첫째, 표준 final-layer distillation 환경에서 final layer로부터
+geometry를 직접 디코딩하는 Pi3는 non-distilled baseline을 크게 상회한 반면, DPT-based 모델들은
+미미한 이득에 그치거나 negative transfer를 보였으며, 이는 decoding head와 distillation target 간의 정합성이
+핵심적임을 보여준다. 둘째, bidirectional 및 causal 변형 간에는 일관된 우위가 나타나지 않아 attention directionality가
+주요 병목이 아님을 시사한다. 셋째, 더 넓은 temporal stride는 더 긴 history를 통해 전반적인 성능을 향상시키지만,
+넓은 stride에서는 visual overlap 감소로 인해 distillation 이득이 축소된다.
+종합하면 target representation alignment와 temporal context가 attention directionality보다
+더 큰 영향을 미치며, 이는 DPT-based teacher를 위한 multi-layer distillation과 decoupled stride 설계의 동기를 제공한다.
 
