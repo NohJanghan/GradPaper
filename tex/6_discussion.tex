@@ -1,0 +1,24 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+This section synthesizes our empirical findings to discuss the primary design factors governing geometry-based feature distillation (Section~\ref{sec:design_factors}), followed by limitations and directions for future work (Section~\ref{sec:limitations}).
+
+\section{Design Factors}
+\label{sec:design_factors}
+
+Our results across the three design axes indicate that target representation structure and context stride play a far more decisive role in VLN spatial knowledge distillation than information flow directionality.
+
+First, teacher selection and target layer placement are critical. Our experiments show that Pi3 substantially outperforms all other geometry teachers. This may be because, unlike DPT-head-based models that aggregate features across multiple intermediate layers, Pi3 predicts geometry directly from its final backbone layers. Consequently, the conventional practice of uniformly distilling only final-layer features can be suboptimal depending on the teacher's decoding architecture.
+
+Second, the directional mismatch between bidirectional teachers and causal MLLMs does not produce consistent performance differences. Although causally trained StreamVGGT substantially mitigates the degradation of mask-only causal VGGT on RxR-CE, it still fails to surpass bidirectional VGGT, and the CUT3R variants exhibit mixed superiority across metrics. Thus, neither future-frame leakage nor attention directionality acts as a primary bottleneck in the current distillation pipeline.
+
+Third, our temporal stride analysis uncovers a structural trade-off between long-horizon navigation learning and geometry distillation. While wider strides improve both the baseline and distilled MLLMs by exposing longer navigation histories, overly narrow strides limit distillation gains due to insufficient parallax, and overly wide strides reduce inter-frame visual overlap, degrading the multi-view teacher's spatial inference and target feature quality. As a result, a single coupled stride configuration cannot simultaneously maximize long-term context retention and fine-grained 3D spatial supervision.
+
+\section{Limitation \& Future Work}
+\label{sec:limitations}
+
+This study evaluated a limited set of teacher models and employed LoRA for parameter-efficient fine-tuning. Expanding the analysis to a broader suite of geometry foundation models and evaluation benchmarks will be important to verify the generality of our findings. Moreover, investigating whether full fine-tuning allows the student MLLM to absorb high-dimensional geometric representations with greater capacity than LoRA could reveal further distillation gains.
+
+Disentangling architectural factors also remains an open challenge. Although we attribute Pi3's advantage to the alignment between its prediction head and the final-layer distillation target, fixing the target to the last two layers prevents us from fully isolating this effect from other Pi3-specific properties, such as its permutation-equivariant design. Future ablation studies that extract distillation targets from the actual intermediate input layers of DPT-based teachers (e.g., VGGT and DA3) are needed to test this hypothesis directly.
+
+Finally, resolving the temporal stride trade-off calls for architectural improvements to the distillation pipeline. Under the current coupled-stride setup, the MLLM and geometry teacher share identically sampled frames, placing long-horizon context and inter-frame visual overlap in direct conflict. A decoupled-stride distillation framework---where the MLLM observes a wide-stride history for long-term context while the geometry teacher processes denser-stride frames to produce high-quality 3D target features---represents a promising direction for future work.
