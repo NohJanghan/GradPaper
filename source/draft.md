@@ -155,7 +155,7 @@ We report four primary metrics: Success Rate (SR), Success weighted by Path Leng
 
 Tables 2 and 3 compare R2R-CE and RxR-CE performance across different teacher models under the same feature distillation pipeline. On R2R-CE, distilling from Pi3 yields the largest gains across every metric over the non-distilled baseline, improving SR by 5.06 percentage points and SPL by 5.05 percentage points. On RxR-CE as well, Pi3 outperforms the baseline on all metrics, raising nDTW by 0.51 percentage points. By contrast, distilling from VGGT, DA3, or CUT3R produces only marginal improvements on R2R-CE and degrades nDTW below the baseline on RxR-CE.
 
-This disparity stems from the degree of alignment between each teacher's prediction head and the distillation target location. Because Pi3 performs dense prediction directly from the outputs of its last two backbone blocks, it is structurally well-matched to the standard distillation objective that supervises late-layer features. Conversely, VGGT, DA3, and CUT3R are trained to decode geometry through a DPT head that aggregates features across multiple intermediate layers. Consequently, 3D geometric cues may not be sufficiently concentrated in the terminal backbone layers alone, implying that conventional final-layer distillation fails to fully harness the representational capacity of DPT-head-based teachers.
+This disparity likely stems from the degree of alignment between each teacher's prediction head and the distillation target location. Because Pi3 performs dense prediction directly from the outputs of its last two backbone blocks, it is structurally well-matched to the standard distillation objective that supervises late-layer features. Conversely, VGGT, DA3, and CUT3R are trained to decode geometry through a DPT head that aggregates features across multiple intermediate layers. Consequently, 3D geometric cues may not be sufficiently concentrated in the terminal backbone layers alone, implying that conventional final-layer distillation fails to fully harness the representational capacity of DPT-head-based teachers.
 
 ## 4.3 Impact of Information Flow Directionality
 
@@ -179,7 +179,7 @@ This disparity stems from the degree of alignment between each teacher's predict
 
 **Table 5.** RxR-CE Performance by Information Flow Directionality
 
-Tables 4 and 5 compare VLN-CE performance across information flow directionalities within the VGGT and CUT3R families. On R2R-CE, causal VGGT and unidirectional CUT3R achieve slightly higher SR than their respective bidirectional counterparts. However, StreamVGGT—despite being trained directly with causal attention—attains only 35.51% SR and 30.22% SPL, underperforming both standard VGGT and causal VGGT.
+Tables 4 and 5 compare VLN-CE performance across information flow directionalities within the VGGT and CUT3R families. On R2R-CE, causal VGGT and unidirectional CUT3R achieve slightly higher SR than their respective bidirectional counterparts. However, StreamVGGT attains only 35.51% SR and 30.22% SPL, underperforming both standard VGGT and causal VGGT.
 
 On the longer-horizon RxR-CE benchmark, causal VGGT suffers a pronounced performance drop relative to VGGT, whereas StreamVGGT recovers much of this gap, reaching 42.49% SR and 52.75% nDTW. This confirms that causal training mitigates the distribution mismatch induced by applying an inference-time causal mask to a bidirectionally pretrained model. Even so, StreamVGGT still falls short of bidirectional VGGT across all metrics, and the CUT3R family shows mixed trends, with unidirectional CUT3R leading in SR and SPL while bidirectional CUT3R revisiting leads in nDTW.
 
@@ -217,8 +217,7 @@ This study evaluated a limited set of teacher models and employed LoRA for param
 
 Disentangling architectural factors also remains an open challenge. Although we attribute Pi3's advantage to the alignment between its prediction head and the final-layer distillation target, fixing the target to the last two layers prevents us from fully isolating this effect from other Pi3-specific properties, such as its permutation-equivariant design. Future ablation studies that extract distillation targets from the actual intermediate input layers of DPT-based teachers (e.g., VGGT and DA3) are needed to test this hypothesis directly.
 
-Finally, resolving the temporal stride trade-off calls for architectural improvements to the distillation pipeline. Under the current coupled-stride setup, the MLLM and geometry teacher share identically sampled frames, placing long-horizon context and inter-frame visual overlap in direct conflict. A decoupled-stride distillation framework—where the MLLM observes a wide-stride history for long-term context while the geometry teacher processes denser-stride frames to produce high-quality 3D target features—represents a promising direction for future work.
-
+Finally, resolving the temporal stride trade-off calls for architectural improvements to the distillation pipeline. Under the current coupled-stride setup, the MLLM and geometry teacher share identically sampled frames, placing long-horizon context and inter-frame visual overlap in direct conflict. A promising direction for future work is a decoupled-stride distillation framework, in which the MLLM observes a wide-stride history for long-term context while the geometry teacher processes denser-stride frames to produce high-quality 3D target features.
 ---
 
 # SUMMARY
