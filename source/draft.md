@@ -99,7 +99,11 @@ $$
 \mathcal{L} = \mathcal{L}_{act} + \lambda \mathcal{L}_{KD}
 $$
 
-where $\mathcal{L}_{act}$ is the SFT loss for MLLM action prediction and $\lambda$ controls the weight of the KD loss.
+where $\mathcal{L}_{act}$ is the SFT loss for MLLM action prediction and $\lambda$ controls the weight of the KD loss. Figure 1 illustrates the overall framework and the three design factors.
+
+![Overview of the geometry feature distillation framework](../figs/overall.svg)
+
+**Figure 1.** Overview of the geometry feature distillation framework for MLLM-based VLN and the three design factors analyzed in this study: (1) teacher model selection, (2) information flow directionality, and (3) temporal stride of navigation history.
 
 ---
 
@@ -187,9 +191,11 @@ Overall, introducing a causally trained teacher does not yield a consistent adva
 
 ## 4.4 Impact of Temporal Stride
 
-**Figure 1.** RxR-CE nDTW (%) across temporal strides of history
+![Figure 2. Temporal stride of history에 따른 RxR-CE nDTW(%) 변화](./media/media/image1.png)
 
-We next examine how varying the temporal stride (sampling interval) affects performance while holding the number of past frames in the navigation history fixed at 8. Figure 1 plots RxR-CE nDTW for both the baseline and the Pi3-distilled model across strides of 1, 2, 4, and 8. Both models achieve steadily higher overall nDTW as the stride widens.
+**Figure 2.** RxR-CE nDTW (%) across temporal strides of history
+
+We next examine how varying the temporal stride (sampling interval) affects performance while holding the number of past frames in the navigation history fixed at 8. Figure 2 plots RxR-CE nDTW for both the baseline and the Pi3-distilled model across strides of 1, 2, 4, and 8. Both models achieve steadily higher overall nDTW as the stride widens.
 
 However, the marginal gain from distillation varies non-monotonically with stride. At stride 1, viewpoint changes between adjacent frames are minimal, providing insufficient parallax for 3D geometry inference; consequently, the gain from Pi3 distillation is smaller than at stride 2. As the stride increases from 2 to 4 and 8, the gap between the two models progressively narrows, indicating that the added benefit of geometry distillation diminishes in wide-stride regimes.
 

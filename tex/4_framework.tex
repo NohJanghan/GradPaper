@@ -54,4 +54,11 @@ Because teacher target features and student visual tokens may differ in spatial 
 \mathcal{L} = \mathcal{L}_{act} + \lambda \mathcal{L}_{KD}
 \]
 
-where $\mathcal{L}_{act}$ is the SFT loss for MLLM action prediction and $\lambda$ controls the weight of the KD loss.
+where $\mathcal{L}_{act}$ is the SFT loss for MLLM action prediction and $\lambda$ controls the weight of the KD loss. Figure~\ref{fig:overall} illustrates the overall framework and the three design factors.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figs/overall.pdf}
+    \caption{Overview of the geometry feature distillation framework for MLLM-based VLN and the three design factors analyzed in this study: (1) teacher model selection, (2) information flow directionality, and (3) temporal stride of navigation history.}
+    \label{fig:overall}
+\end{figure}
