@@ -1,0 +1,38 @@
+# latex - auxiliary files
+*.synctex.gz
+*.bak
+*.bbl
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.xlsx
+*.synctex(busy)
+*.out
+*.bcf
+*.toc
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.atfi
+*.nav
+*.snm
+indent.log
+thesis.pdf
+
+# eps 파일은 svg 등 다른 벡터그래픽 원본 파일의 중간파일이므로 무시.
+*.eps
+
+# vscode settings - ignore.
+.vscode
+
+# macOS finder system files - ignore.
+*.DS_Store
+
+# >> Ignore all files within directory: >> #
+_material/*
+_planning/*
+_etc/*
